@@ -3,13 +3,14 @@ import kotlin.random.Random
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.SendChannel
 import kotlinx.coroutines.flow.*
+import kotlin.time.Duration.Companion.milliseconds
 
 data class SensorReading(val sensorId: String, val value: Double, val timestamp: Long)
 suspend fun emitSensorData(sensorId: String, channel: SendChannel<SensorReading>) = coroutineScope {
     launch {
         for (i in 1..10)
         {
-            delay(500)
+            delay(500.milliseconds)
             val pokazania = SensorReading(
                 sensorId,
                 Random.nextDouble(15.0, 30.0),
@@ -58,7 +59,7 @@ suspend fun main() = coroutineScope{
 }
 fun sensorFlow(sensorId: String): Flow<SensorReading> = flow{
     repeat(10){
-        delay(300)
+        delay(300.milliseconds)
         val pokazania = SensorReading(
             sensorId,
             Random.nextDouble(15.0, 30.0),
