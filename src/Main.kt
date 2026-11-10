@@ -42,6 +42,7 @@ suspend fun main() = coroutineScope{
 
     val flowMethod = sensorFlow("TEMP") // Ещё ничего не делает, пока не вызовем fold или toList
     println(flowMethod.toList())
+
     val (sum, count) = flowMethod.fold(Pair(0.0, 0)) {(accSum, accCount), reading ->
         Pair(accSum+reading.value, accCount + 1)
     }
